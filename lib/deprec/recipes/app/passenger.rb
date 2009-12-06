@@ -56,7 +56,7 @@ Capistrano::Configuration.instance(:must_exist).load do
         
       end
       
-      task :initial_config_push, :roles => :web do
+      task :initial_config_push, :roles => :app do
         # XXX Non-standard!
         # We need to push out the .load and .conf files for Passenger
         SYSTEM_CONFIG_FILES[:passenger].each do |file|

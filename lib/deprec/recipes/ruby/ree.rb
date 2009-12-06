@@ -15,6 +15,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       }
  
       task :install do
+        SRC_PACKAGES[:ree][:install] += ' --configure-arg --enable-shared' if [:webroar].include?(app_server_type)
         install_deps
         deprec2.download_src(SRC_PACKAGES[:ree], src_dir)
         deprec2.install_from_src(SRC_PACKAGES[:ree], src_dir)

@@ -28,7 +28,7 @@ Capistrano::Configuration.instance(:must_exist).load do
   # Server options
   CHOICES_RUBY_VM   = [:mri, :ree]
   CHOICES_WEBSERVER = [:nginx, :apache, :none]
-  CHOICES_APPSERVER = [:mongrel, :webrick, :passenger, :none]
+  CHOICES_APPSERVER = [:mongrel, :webrick, :passenger, :webroar, :none]
   CHOICES_DATABASE  = [:mysql, :postgresql, :sqlite, :none]
   
   # Service defaults
