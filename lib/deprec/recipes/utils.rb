@@ -4,17 +4,9 @@ Capistrano::Configuration.instance(:must_exist).load do
     namespace :utils do
 
         SRC_PACKAGES[:daemonize] = {
-          :filename => 'daemonize-1.5.6.tar.gz',
-          :md5sum => "2f5fbb8788ebe803ccaff3cd4b5c3188  daemonize-1.5.6.tar.gz",
-          :dir => 'daemonize-1.5.6',
-          :url => "http://www.clapper.org/software/daemonize/daemonize-1.5.6.tar.gz",
-          :unpack => "tar zxf daemonize-1.5.6.tar.gz;",
-          :configure => %w(
-            ./configure
-            ;
-            ).reject{|arg| arg.match '#'}.join(' '),
-          :make => 'make;',
-          :install => 'make install;'
+          :md5sum => "62aef13cf2dbc305b8c2c033a26cc18d  bmc-daemonize-release-1.6-0-gf9d8e03.tar.gz",
+          :url => "http://github.com/bmc/daemonize/tarball/release-1.6",
+          :dir => 'bmc-daemonize-f9d8e03'
         }
 
         namespace :daemonize do
@@ -35,7 +27,7 @@ Capistrano::Configuration.instance(:must_exist).load do
 
         desc "Install some useful mail utils"
         task :mail do
-          apps = %w(mailx mutt)
+          apps = %w(mailutils mutt)
           apt.install( {:base => apps}, :stable )
         end
 
@@ -50,6 +42,12 @@ Capistrano::Configuration.instance(:must_exist).load do
           net
           mail
           other
+          top.deprec.ddt.install
+        end
+
+        task :remove_consolekit do
+          run "#{sudo} killall console-kit-daemon; exit 0"
+          run "#{sudo} apt-get -y remove consolekit # chews resources"
         end
 
     end
