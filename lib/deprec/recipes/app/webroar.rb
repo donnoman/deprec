@@ -1,4 +1,3 @@
-# Copyright 2006-2008 by Mike Bailey. All rights reserved.
 # Copyright 2009 by Donovan Bray. Released under the MIT license
 Capistrano::Configuration.instance(:must_exist).load do
   namespace :deprec do
